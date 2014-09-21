@@ -1,9 +1,9 @@
 Practical Machine Learning project
 ========================================================
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the **Help** toolbar button for more details on using R Markdown).
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: http://groupware.les.inf.puc-rio.br/har (see the section on the Weight Lifting Exercise Dataset). 
 
-When you click the **Knit HTML** button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Loading the data
 
 ```{r}
 
@@ -15,7 +15,7 @@ setwd("/Users/krochek/Copy/Coursera/Practical Machine Learning/project")
 pmltraining <- read.csv("./pml-training.csv")
 pmltesting <- read.csv("./pml-testing.csv")
 ```
-## Now, lets clean the data up a bit:
+## Now, lets clean the data a bit:
 
 The following code makes sure there are no predictors that have very low variance due to missing values mostly. I must admit that the test data given (20 cases) - helped to better understand which are the ones not needed as well - Given the fact that if a variable is empty or NA in all 20 rows - it can't add any information for prediction, therefore it's not significant for the prediction model.
 
@@ -46,7 +46,7 @@ testingtemp <- testingtemp[,!names(testingtemp) %in% drops]
 
 ## partitioning the data
 
- I've partition the processes pmltraining data into 3/4 training and 1/4 testing for the cross validation - to understand the out of sample error rate and see that the model doesn't overfitt. 
+ I've partitioned the processed pmltraining data into 3/4 training and 1/4 testing for the cross validation - to understand the out of sample error rate and see that the model doesn't overfitt. 
  
 ```{r}
 inTrain <- createDataPartition(y=trainingtemp$classe, p =0.75, list = FALSE)
